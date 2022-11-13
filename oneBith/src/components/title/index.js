@@ -6,5 +6,5 @@ export default function Title(){
         <View>
             <Text>OneBith App</Text>
         </View>
-    );
+    )
 }
