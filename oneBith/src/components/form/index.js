@@ -50,7 +50,7 @@ export default function Form(){
             <View>
                 <Button 
                 onPress={()=> validationImc()} //chamada da função de calcular quando pressionar o botão
-                title='Calcular IMC'//descrição do botão
+                title={textButton}//descrição do botão
                 />
             </View>
             <ResultImc 
