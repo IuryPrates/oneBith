@@ -20,9 +20,10 @@ export default function Form(){
     const [textButton, setTextButton] = useState('Calcular')
     //adiciona estado para controle de aviso quando o campo está vazio
     const [errorMessage, setErrorMessage] = useState(null) 
-
+ 
     function imcCalcula(){
-        return setImc((weight/(height*height)).toFixed(2))
+        let heightFormat = height.replace(",",".")
+        return setImc((weight/(heightFormat*heightFormat)).toFixed(2))
     }
 
     function verificationImc(){
