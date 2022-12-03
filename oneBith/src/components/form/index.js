@@ -7,7 +7,6 @@ import {
     Vibration,
     Pressable,
     Keyboard,
-    SafeAreaView,
     FlatList,
 } from 'react-native'
 import ResultImc from './resultimc'
@@ -22,21 +21,17 @@ export default function Form(){
     const [textButton, setTextButton] = useState('Calcular')
     //adiciona estado para controle de aviso quando o campo está vazio
     const [errorMessage, setErrorMessage] = useState(null) 
-
-    const DATA = [
-        {
-            id: 1,
-            title: "first item",
-        },
-        {
-            id: 2,
-            title: "second item",
-        }
-    ];
+    const [imcList, setImcList] = useState([]) //cria lista de imcs calculados
  
     function imcCalcula(){
         let heightFormat = height.replace(",",".")
-        return setImc((weight/(heightFormat*heightFormat)).toFixed(2))
+        let totalImc = (weight/(heightFormat*heightFormat)).toFixed(2);
+        //após chamada a função e calcular setar dentro da array de lista de imcs 
+        setImcList((arr) => [...arr, {
+            id: new Date().getTime(),
+            imc:totalImc
+        }])
+        setImc(totalImc)
     }
 
     function verificationImc(){
@@ -111,6 +106,21 @@ export default function Form(){
                 </TouchableOpacity>
             </View>
             }
+            <FlatList 
+            style={styles.listImc} 
+            data={imcList.reverse()}//reverse inverte a lista, para o ultimo 
+            //que foi adicionado aparecer no topo
+            renderItem={({item}) => {
+                return(
+                    <Text style={styles.resultImcItem}>
+                        <Text style={styles.textResultItemList}> Resultado IMC = {item.imc}</Text>
+                    </Text>
+                )
+            }}
+            keyExtractor={(item) =>{
+                item.id
+            }}
+            />
         </View>
     );
 }
