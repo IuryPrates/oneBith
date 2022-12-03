@@ -7,6 +7,8 @@ import {
     Vibration,
     Pressable,
     Keyboard,
+    SafeAreaView,
+    FlatList,
 } from 'react-native'
 import ResultImc from './resultimc'
 import styles from './style'
@@ -20,6 +22,17 @@ export default function Form(){
     const [textButton, setTextButton] = useState('Calcular')
     //adiciona estado para controle de aviso quando o campo está vazio
     const [errorMessage, setErrorMessage] = useState(null) 
+
+    const DATA = [
+        {
+            id: 1,
+            title: "first item",
+        },
+        {
+            id: 2,
+            title: "second item",
+        }
+    ];
  
     function imcCalcula(){
         let heightFormat = height.replace(",",".")
@@ -41,17 +54,21 @@ export default function Form(){
             setMessageImc("Seu IMC é igual:");
             setTextButton("Calcular novamente");
             setErrorMessage(null)
-            return;
         }
-        verificationImc();
-        setImc(null)
-        setTextButton("Calcular")
-        setMessageImc("Preencha a altura e o peso")
+        else{
+            verificationImc();
+            setImc(null)
+            setTextButton("Calcular")
+            setMessageImc("Preencha a altura e o peso")
+        }
     }
 
     return(
-        <Pressable onPress={Keyboard.dismiss} style={styles.formContext}>
-            <View style={styles.form}>
+        <View style={styles.formContext}>
+            {imc == null ?
+            //botão de compartilhar só será exibido se tiver setado 
+            //um valor de resultado do cálculo.
+            <Pressable onPress={Keyboard.dismiss} style={styles.form}>
                 <Text style={styles.formLabel}>Altura</Text>
 
                 <Text style={styles.errorMessage}>{errorMessage}</Text>
@@ -79,11 +96,21 @@ export default function Form(){
                 >
                 <Text style={styles.textFormButton}>{textButton}</Text>
                 </TouchableOpacity>
+            </Pressable>
+            ://caso contrário exibe uma View vazia
+            <View style={styles.exibitionResultImc}>
+                <ResultImc 
+                messageResultImc={messageImc} //mensagem setada
+                resultImc={imc} //resultado calculado
+                />
+                <TouchableOpacity
+                style={styles.formButton} 
+                onPress={()=> validationImc()} //chamada da função de calcular quando pressionar o botão
+                >
+                <Text style={styles.textFormButton}>{textButton}</Text>
+                </TouchableOpacity>
             </View>
-            <ResultImc 
-            messageResultImc={messageImc} //mensagem setada
-            resultImc={imc} //resultado calculado
-            />
-        </Pressable>
+            }
+        </View>
     );
 }

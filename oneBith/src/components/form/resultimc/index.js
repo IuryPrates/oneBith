@@ -17,22 +17,17 @@ export default function ResultImc(props){
 
     return( 
         <View style={styles.resultImc}> 
+            <Text style={styles.informationImc}>{props.messageResultImc}</Text>
+            <Text style={styles.numberImc}>{props.resultImc}</Text>
             <View style={styles.boxShareButton}>
-                {props.resultImc != null ?
-                //botão de compartilhar só será exibido se tiver setado 
-                //um valor de resultado do cálculo.
                 <TouchableOpacity 
                 style={styles.shared}
                 onPress={onShare}
                 >
-                    <Text style={styles.sharedText}>Share</Text>
+                <Text style={styles.sharedText}>Compartilhar</Text>
                 </TouchableOpacity>
-                : //caso contrário exibe uma View vazia
-                <View/>
-                }
+                
             </View>
-            <Text style={styles.informationImc}>{props.messageResultImc}</Text>
-            <Text style={styles.numberImc}>{props.resultImc}</Text>
         </View>
     )
 }
