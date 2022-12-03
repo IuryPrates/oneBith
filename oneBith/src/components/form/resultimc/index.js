@@ -21,7 +21,10 @@ export default function ResultImc(props){
                 {props.resultImc != null ?
                 //botão de compartilhar só será exibido se tiver setado 
                 //um valor de resultado do cálculo.
-                <TouchableOpacity style={styles.shared}>
+                <TouchableOpacity 
+                style={styles.shared}
+                onPress={onShare}
+                >
                     <Text style={styles.sharedText}>Share</Text>
                 </TouchableOpacity>
                 : //caso contrário exibe uma View vazia
