@@ -58,14 +58,15 @@ const styles = StyleSheet.create({
         marginTop: 30
     },
     resultImcItem:{
-        fontSize: 28,
-        color: "red",
+        fontSize: 18,
+        color: "#000000",
         height: 50,
         width: "100%",
         paddingRight: 20,
     },
     textResultItemList:{
-        fontSize: 15,
+        fontSize: 25,
+        color: "green"
     }
 })
 
