@@ -26,11 +26,9 @@ export default function Form(){
     function imcCalcula(){
         let heightFormat = height.replace(",",".")
         let totalImc = (weight/(heightFormat*heightFormat)).toFixed(2);
+        let idDate = new Date().getTime()
         //após chamada a função e calcular setar dentro da array de lista de imcs 
-        setImcList((arr) => [...arr, {
-            id: new Date().getTime(),
-            imc:totalImc
-        }])
+        setImcList((arr) => [...arr, {id: idDate, imc: totalImc}])
         setImc(totalImc)
     }
 
@@ -42,6 +40,7 @@ export default function Form(){
     }
 
     function validationImc(){
+        console.log(imcList)
         if(weight != null && height != null){
             imcCalcula();
             setHeight(null);
@@ -110,16 +109,14 @@ export default function Form(){
             style={styles.listImc} 
             data={imcList.reverse()}//reverse inverte a lista, para o ultimo 
             //que foi adicionado aparecer no topo
-            renderItem={({item}) => {
+            renderItem={({item}, key) => {
                 return(
                     <Text style={styles.resultImcItem}>
-                      Resultado IMC = <Text style={styles.textResultItemList}>  {item.imc}</Text>
+                      Resultado IMC = <Text style={styles.textResultItemList} key={key}>  {item.imc}</Text>
                     </Text>
                 )
             }}
-            keyExtractor={(item) =>{
-                item.id
-            }}
+            keyExtractor={item => {item.id}}
             />
         </View>
     );
