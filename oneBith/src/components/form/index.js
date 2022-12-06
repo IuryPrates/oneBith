@@ -106,6 +106,7 @@ export default function Form(){
             </View>
             }
             <FlatList 
+            showsVerticalScrollIndicator={true}//barra de progresso da lista
             style={styles.listImc} 
             data={imcList.reverse()}//reverse inverte a lista, para o ultimo 
             //que foi adicionado aparecer no topo
